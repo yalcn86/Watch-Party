@@ -1,0 +1,130 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKARUS // WATCH PARTY CENTRE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/site.css">
+</head>
+<body>
+
+    <div class="app-interface central-hub">
+        <header class="main-header">
+            <div class="logo">IKARUS<span>//</span>HUB</div>
+            <div class="status-badge">SYS_STATUS: <span id="systemStatus" style="color: var(--cyber-yellow);">CENTRAL_ONLINE</span></div>
+        </header>
+
+        <main class="hub-container">
+            
+            <section class="hub-card room-management">
+                <h2 class="section-title">// MISSION_CONTROL</h2>
+                <p class="section-desc">Yeni bir siber-bağlantı kurun veya mevcut bir tünele dahil olun.</p>
+                
+                <div class="action-zone">
+                    <div class="action-box">
+                        <button id="btnCreateRoom" class="cyber-btn primary">INITIATE NEW ROOM</button>
+                    </div>
+
+                    <div class="divider"><span>OR</span></div>
+
+                    <div class="action-box">
+                        <div class="hub-input-group">
+                            <input type="text" id="joinRoomCode" placeholder="ENTER ROOM CODE (e.g. IKARUS-9852)">
+                            <button id="btnJoinRoom" class="cyber-btn cyan">JOIN TUNNEL</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="hub-card platform-selector">
+                <h2 class="section-title">// STREAM_COORDINATES</h2>
+                <p class="section-desc">Hangi veri akışını senkronize etmek istiyorsunuz?</p>
+                
+                <div class="platform-grid">
+                    <div class="platform-item active" data-platform="youtube">
+                        <div class="platform-icon">YT</div>
+                        <span class="platform-name">YOUTUBE</span>
+                        <span class="platform-status">READY</span>
+                    </div>
+                    <div class="platform-item locked" data-platform="netflix">
+                        <div class="platform-icon">NX</div>
+                        <span class="platform-name">NETFLIX</span>
+                        <span class="platform-status">[LOCKED]</span>
+                    </div>
+                    <div class="platform-item locked" data-platform="hbo">
+                        <div class="platform-icon">HB</div>
+                        <span class="platform-name">HBO MAX</span>
+                        <span class="platform-status">[LOCKED]</span>
+                    </div>
+                    <div class="platform-item locked" data-platform="disney">
+                        <div class="platform-icon">DS</div>
+                        <span class="platform-name">DISNEY+</span>
+                        <span class="platform-status">[LOCKED]</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <div class="scandown-zone">
+            <section class="info-section">
+                <h2 class="section-title">// CORE_MANIFESTO: WHAT IS WATCHPARTY?</h2>
+                <p class="manifesto-text">
+                    Uzun zamandır üzerinde titizlikle çalıştığımız <strong>WatchParty</strong> projemiz nihayet hazır! <br><br>
+                    WatchParty; birbirlerinden tamamen uzakta olan insanların, mesafeleri hiçe sayarak aynı anda aynı videoyu izleyebilmesini ve eş zamanlı olarak sohbet edebilmesini sağlayan dijital bir köprüdür. <br><br>
+                    Şu an için yalnızca YouTube videolarını milisaniyelik senkronizasyonla oynatabilen bu sistem, ilerleyen süreçte sizlerin de desteğiyle tüm video formatlarını ve platformları destekleyecek şekilde genişletilecektir. Şimdilik Beta sürümünde olan projemiz, çok yakında tamamen açık kaynaklı (open-source) olarak topluluğa sunulacaktır.
+                </p>
+            </section>
+
+            <section class="info-section">
+                <h2 class="section-title">// SYSTEM_LOG: PATCH_NOTES v0.1.0</h2>
+                <ul class="patch-list">
+                    <li><span class="patch-tag add">[ADDED]</span> ASP.NET Core MVC ve Kestrel sunucu mimarisi entegre edildi.</li>
+                    <li><span class="patch-tag add">[ADDED]</span> SQLite veritabanı (ikarus.db) ve Entity Framework Core altyapısı kuruldu.</li>
+                    <li><span class="patch-tag add">[ADDED]</span> Milisaniyelik hassasiyete sahip SignalR tabanlı "Absolute Sync" video tetikleyicileri hazırlandı.</li>
+                    <li><span class="patch-tag fix">[FIXED]</span> YouTube iframe gömme kısıtlamaları ve domain CORS engelleri bypass edildi.</li>
+                    <li><span class="patch-tag change">[CHANGED]</span> Arayüz tasarımı "Dark-Luxe" siberpunk hatlarına kavuşturuldu.</li>
+                </ul>
+            </section>
+
+            <section class="info-section contact-section">
+                <h2 class="section-title">// UPLINK_CHANNELS: CONTACT</h2>
+                <p class="section-desc">Sistem mimarı ile doğrudan iletişim kurun, hata bildiriminde bulunun veya projeye destek olun.</p>
+                <div class="comms-badge">
+                    <span class="comms-label">ARCHITECT EMAIL:</span>
+                    <a href="mailto:mustafayalcinboz@gmail.com" class="comms-link">mustafayalcinboz@gmail.com</a>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("btnCreateRoom").addEventListener("click", function () {
+            fetch('/Home/CreateRoom', { method: 'POST' })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        window.location.href = '/Home/Room?code=' + data.roomCode;
+                    } else {
+                        alert("Siber bağlantı kurulamadı.");
+                    }
+                });
+        });
+
+        document.getElementById("btnJoinRoom").addEventListener("click", function () {
+            var code = document.getElementById("joinRoomCode").value.trim();
+            if (code) {
+                window.location.href = '/Home/Room?code=' + code;
+            } else {
+                alert("Lütfen geçerli bir tünel kodu girin.");
+            }
+        });
+    </script>
+</body>
+</html>

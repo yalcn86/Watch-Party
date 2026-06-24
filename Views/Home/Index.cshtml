@@ -1,0 +1,372 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKARUS // HUB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #0a0a0f;
+            --bg-card: #12121a;
+            --cyber-cyan: #00f0ff;
+            --cyber-yellow: #ffec00;
+            --cyber-red: #ff0055;
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+            --border-color: #222235;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: radial-gradient(circle at 50% 50%, #141425 0%, #0a0a0f 100%);
+            padding: 20px;
+        }
+
+        .app-interface {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-bottom: 3px solid var(--cyber-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+            margin-bottom: 50px;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 10px var(--cyber-cyan);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--cyber-cyan);
+            margin: 0 5px;
+        }
+
+        .status-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            padding: 5px 15px;
+            border: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .auth-link {
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            transition: all 0.3s ease;
+        }
+        .auth-link:hover {
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .central-panel {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .cyber-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            transition: all 0.4s ease;
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid transparent;
+            border-left: 2px solid transparent;
+        }
+
+        .cyber-card.create-zone:hover {
+            border-color: var(--cyber-yellow);
+            box-shadow: 0 0 30px rgba(255, 236, 0, 0.05);
+        }
+        .cyber-card.create-zone::before {
+            border-top-color: var(--cyber-yellow);
+            border-left-color: var(--cyber-yellow);
+        }
+
+        .cyber-card.join-zone:hover {
+            border-color: var(--cyber-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.05);
+        }
+        .cyber-card.join-zone::before {
+            border-top-color: var(--cyber-cyan);
+            border-left-color: var(--cyber-cyan);
+        }
+
+        .card-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .create-zone .card-title { color: var(--cyber-yellow); }
+        .join-zone .card-title { color: var(--cyber-cyan); }
+
+        .card-desc {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .cyber-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .cyber-input-group label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .cyber-input {
+            background: #06060a;
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            color: #fff;
+            font-family: monospace;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-color: var(--cyber-cyan);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+        }
+
+        .cyber-btn {
+            padding: 18px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .cyber-btn.yellow {
+            background: var(--cyber-yellow);
+            color: #000;
+        }
+        .cyber-btn.yellow:hover {
+            background: #fff;
+            box-shadow: 0 0 20px var(--cyber-yellow);
+        }
+
+        .cyber-btn.cyan {
+            background: var(--cyber-cyan);
+            color: #000;
+        }
+        .cyber-btn.cyan:hover {
+            background: #fff;
+            box-shadow: 0 0 20px var(--cyber-cyan);
+        }
+
+        /* MODAL PANEL STİLLERİ */
+        .cyber-modal {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border: 2px solid var(--cyber-yellow);
+            box-shadow: 0 0 30px rgba(255, 236, 0, 0.15);
+            padding: 35px;
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px; right: 20px;
+            color: var(--text-muted);
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        .modal-close:hover { color: var(--cyber-red); }
+    </style>
+</head>
+<body>
+@if (TempData["Error"] != null)
+{
+    <div style="background: rgba(255, 0, 85, 0.2); border: 1px solid var(--cyber-red); color: #fff; padding: 15px; text-align: center; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 0, 85, 0.2); margin-bottom: 20px;">
+        [SYS_ALERT] @TempData["Error"]
+    </div>
+}
+    <div class="app-interface">
+        <header class="main-header">
+            <a href="/" class="logo">IKARUS<span>//</span>HUB</a>
+            
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <div class="status-badge" style="border-color: var(--cyber-yellow);">
+                    <a href="/Account/Login" class="auth-link login" style="color: var(--cyber-yellow);">// LOGIN</a>
+                </div>
+                <div class="status-badge" style="border-color: var(--cyber-cyan);">
+                    <a href="/Account/Register" class="auth-link register" style="color: var(--cyber-cyan);">// REGISTER</a>
+                </div>
+                <div class="status-badge">SYS_STATUS: <span style="color: var(--cyber-cyan);">ONLINE</span></div>
+            </div>
+        </header>
+
+        <main class="central-panel">
+            
+            <section class="cyber-card create-zone">
+                <h2 class="card-title">// INITIALIZE NEW TUNNEL</h2>
+                <p class="card-desc">Yeni ve bağımsız bir yayın senkronizasyon tüneli inşa edin. Odaya şifre koyarak tüneli sadece istediğiniz siber kimliklere açın.</p>
+                <button id="btnOpenCreateModal" class="cyber-btn yellow">CREATE TUNNEL</button>
+            </section>
+
+            <section class="cyber-card join-zone">
+                <h2 class="card-title">// ACCESS EXISTING TUNNEL</h2>
+                <p class="card-desc">Aktif bir siber akış tüneline dahil olun. Bağlanmak istediğiniz tünelin benzersiz protokol kodunu (TUNNEL_ID) aşağıya kazıyın.</p>
+                
+                <div class="cyber-input-group">
+                    <label for="txtRoomCode">ENTER PROTOCOL_ID</label>
+                    <input type="text" id="txtRoomCode" class="cyber-input" placeholder="IKARUS-XXXX" autocomplete="off">
+                </div>
+
+                <button id="btnJoinRoom" class="cyber-btn cyan">JOIN TUNNEL</button>
+            </section>
+
+        </main>
+    </div>
+
+    <div id="createModal" class="cyber-modal">
+        <div class="modal-content">
+            <div class="modal-close" id="btnCloseModal">X</div>
+            <h3 class="card-title" style="color: var(--cyber-yellow);">// TUNNEL CONFIG</h3>
+            <p class="card-desc" style="font-size: 0.9rem;">Tüneli ayağa kaldırmadan önce erişim parametrelerini yapılandırın.</p>
+            
+            <div class="cyber-input-group">
+                <label>TUNNEL NAME (ODA ADI)</label>
+                <input type="text" id="modalRoomName" class="cyber-input" placeholder="Yalcin'in Odasi" style="letter-spacing: 0px;">
+            </div>
+
+            <div class="cyber-input-group">
+                <label>TUNNEL KEY (ODA ŞİFRESİ)</label>
+                <input type="password" id="modalRoomPassword" class="cyber-input" placeholder="****">
+            </div>
+
+            <button id="btnFinalCreate" class="cyber-btn yellow" style="padding: 12px;">LAUNCH TUNNEL</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById("createModal");
+        
+        document.getElementById("btnOpenCreateModal").addEventListener("click", () => {
+            modal.style.display = "flex";
+        });
+
+        document.getElementById("btnCloseModal").addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        document.getElementById("btnFinalCreate").addEventListener("click", function() {
+            var roomName = document.getElementById("modalRoomName").value.trim();
+            var roomPass = document.getElementById("modalRoomPassword").value.trim();
+
+            if(!roomName) {
+                alert("Lütfen tünele bir isim verin şef!");
+                return;
+            }
+
+            fetch('/Home/CreateRoom', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'roomName=' + encodeURIComponent(roomName) + '&roomPassword=' + encodeURIComponent(roomPass)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    window.location.href = '/Home/Room?code=' + data.roomCode;
+                } else {
+                    alert("Tünel inşası başarısız oldu.");
+                }
+            });
+        });
+
+        document.getElementById("btnJoinRoom").addEventListener("click", function() {
+            var code = document.getElementById("txtRoomCode").value.trim();
+            if(code) {
+                window.location.href = '/Home/Room?code=' + code;
+            } else {
+                alert("Lütfen geçerli bir tünel protokol kodu girin şef!");
+            }
+        });
+    </script>
+</body>
+</html>

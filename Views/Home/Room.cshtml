@@ -1,0 +1,317 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IKARUS // UNIVERSAL MULTI-TUNNEL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #06060a;
+            --bg-panel: #0c0c14;
+            --cyber-cyan: #00f0ff;
+            --cyber-yellow: #ffec00;
+            --cyber-red: #ff0055;
+            --text-main: #f1f5f9;
+            --text-muted: #4e4e6a;
+            --border-color: #1a1a26;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* ÜST BAR */
+        .tunnel-header {
+            height: 65px;
+            background: var(--bg-panel);
+            border-bottom: 2px solid var(--cyber-cyan);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.1);
+            gap: 20px;
+        }
+
+        .room-meta-zone { display: flex; flex-direction: column; gap: 2px; }
+        .room-title { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--cyber-yellow); }
+        .room-info { font-family: monospace; font-size: 0.85rem; letter-spacing: 1px; color: var(--text-main); }
+
+        /* ENJEKTE PANELİ */
+        .url-inject-panel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0,0,0,0.4);
+            padding: 6px 12px;
+            border: 1px solid var(--border-color);
+            flex: 1;
+            max-width: 550px;
+            box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.05);
+        }
+
+        .url-input { flex: 1; background: transparent; border: none; color: var(--cyber-cyan); font-family: monospace; font-size: 0.9rem; }
+        .url-input:focus { outline: none; }
+
+        .url-btn {
+            background: transparent; border: 1px solid var(--cyber-cyan); color: var(--cyber-cyan);
+            padding: 4px 14px; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 700;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .url-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 10px var(--cyber-cyan); }
+
+        .identity-zone { display: flex; align-items: center; gap: 15px; }
+        .password-box { font-family: monospace; background: #000; padding: 5px 10px; border: 1px solid var(--border-color); font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
+        .pass-toggle-btn { background: none; border: none; color: var(--cyber-cyan); cursor: pointer; font-family: 'Orbitron', sans-serif; font-size: 0.7rem; text-decoration: underline; }
+
+        .tunnel-container { flex: 1; display: grid; grid-template-columns: 1fr 380px; height: calc(100vh - 65px); }
+
+        /* SİBER MEDYA MERKEZİ ALANI (SOL) */
+        .stream-zone { padding: 20px; display: flex; flex-direction: column; background: #08080f; }
+        .video-wrapper { flex: 1; background: #000; border: 1px solid var(--border-color); position: relative; }
+
+        /* Sürücüler Üst Üste Biniyor, Akıllı JS Sadece İsteneni Gösterecek */
+        #ytPlayerContainer, #mp4Player, #webEmbedPlayer {
+            width: 100%; height: 100%; position: absolute; top: 0; left: 0; border: none; object-fit: contain;
+        }
+        .hidden-player { display: none !important; }
+
+        /* CHAT PANELİ (SAĞ) */
+        .comms-panel { background: var(--bg-panel); border-left: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        .panel-header { padding: 15px; font-family: 'Orbitron', sans-serif; font-size: 0.9rem; letter-spacing: 1px; color: var(--cyber-cyan); border-bottom: 1px solid var(--border-color); background: rgba(0,0,0,0.2); }
+        .chat-logs { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-family: monospace; font-size: 0.9rem; }
+        .log-line { line-height: 1.4; word-break: break-all; }
+        .log-time { color: var(--text-muted); }
+        .log-user { color: var(--cyber-yellow); font-weight: bold; }
+        .log-msg { color: #fff; }
+
+        .comms-input-area { padding: 15px; border-top: 1px solid var(--border-color); background: rgba(0,0,0,0.3); display: flex; gap: 10px; }
+        .comms-input { flex: 1; background: #06060a; border: 1px solid var(--border-color); padding: 12px; color: #fff; font-family: monospace; }
+        .comms-input:focus { outline: none; border-color: var(--cyber-cyan); }
+        .comms-btn { background: var(--cyber-cyan); color: #000; border: none; padding: 0 20px; font-family: 'Orbitron', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        .comms-btn:hover { background: #fff; box-shadow: 0 0 10px var(--cyber-cyan); }
+    </style>
+</head>
+<body>
+
+    <header class="tunnel-header">
+        <div class="room-meta-zone">
+            <div class="room-title">// UNIVERSAL TUNNEL: @ViewBag.RoomName</div>
+            <div class="room-info">ID: <span id="roomCodeSpan">@ViewBag.RoomCode</span></div>
+        </div>
+
+        <div class="url-inject-panel">
+            <input type="text" id="txtVideoUrl" class="url-input" placeholder="YouTube, MP4 VEYA Film sitesi (HDFilmCehennemi vb.) linki yapıştırın..." autocomplete="off">
+            <button id="btnLoadVideo" class="url-btn">LOAD</button>
+        </div>
+
+        <div class="identity-zone">
+            <div class="password-box">
+                <span>KEY:</span>
+                <span id="lblRoomPassword" data-real-pass="@ViewBag.RoomPassword">••••</span>
+                <button id="btnTogglePass" class="pass-toggle-btn">[GÖSTER]</button>
+            </div>
+            <div class="user-identity" style="font-family: 'Orbitron', sans-serif; color: var(--cyber-cyan);">[@ViewBag.CurrentUser]</div>
+        </div>
+    </header>
+
+    <div class="tunnel-container">
+        <main class="stream-zone">
+            <div class="video-wrapper">
+                <div id="ytPlayerContainer"></div>
+                
+                <video id="mp4Player" controls class="hidden-player" src=""></video>
+
+                <iframe id="webEmbedPlayer" class="hidden-player" allowfullscreen sandbox="allow-forms allow-modals allow-orientation-lock allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-scripts allow-same-origin"></iframe>
+            </div>
+        </main>
+
+        <aside class="comms-panel">
+            <div class="panel-header">// TUNNEL_UNIVERSAL_LOG</div>
+            <div class="chat-logs" id="chatLogs">
+                <div class="log-line"><span class="log-time">[SYS]</span> <span style="color: var(--cyber-cyan);">Evrensel akış algılayıcı devrede.</span></div>
+            </div>
+            <div class="comms-input-area">
+                <input type="text" id="btnMsgInput" class="comms-input" placeholder="Sinyal gönder..." autocomplete="off">
+                <button id="btnSendMsg" class="comms-btn">SEND</button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        const roomCode = "@ViewBag.RoomCode";
+        const currentUser = "@ViewBag.CurrentUser";
+        
+        let ytPlayer;
+        const mp4Player = document.getElementById("mp4Player");
+        const webEmbedPlayer = document.getElementById("webEmbedPlayer");
+        let activePlayerType = "youtube"; 
+        let isHandlingSignal = false;
+
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('ytPlayerContainer', {
+                videoId: 'dQw4w9WgXcQ',
+                playerVars: { 'autoplay': 0, 'controls': 1, 'rel': 0 },
+                events: { 'onStateChange': onYoutubeStateChange }
+            });
+        }
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/tunnelHub")
+            .withAutomaticReconnect()
+            .build();
+
+        connection.start().then(function () {
+            connection.invoke("JoinTunnel", roomCode);
+        }).catch(err => console.error(err));
+
+        connection.on("ReceiveMessage", function (user, message) {
+            const logs = document.getElementById("chatLogs");
+            const time = new Date().toLocaleTimeString();
+            logs.innerHTML += `<div class="log-line"><span class="log-time">[${time}]</span> <span class="log-user">${user}:</span> <span class="log-msg">${message}</span></div>`;
+            logs.scrollTop = logs.scrollHeight;
+        });
+
+        // HİBRİT ANLIK OYNAT/DURDUR SİNYALİ DİNLEME
+        connection.on("ReceiveVideoAction", function (action, time) {
+            if (isHandlingSignal) return;
+            isHandlingSignal = true;
+
+            if (activePlayerType === "youtube" && ytPlayer && ytPlayer.getPlayerState) {
+                if (Math.abs(ytPlayer.getCurrentTime() - time) > 2) ytPlayer.seekTo(time, true);
+                if (action === "play") ytPlayer.playVideo();
+                else if (action === "pause") ytPlayer.pauseVideo();
+            } else if (activePlayerType === "mp4") {
+                mp4Player.currentTime = time;
+                if (action === "play") mp4Player.play().catch(e => console.log(e));
+                else if (action === "pause") mp4Player.pause();
+            }
+            // Not: webEmbed (iframe) dış sitelerin kendi koruması nedeniyle kodla durdurulup başlatılamaz şef, el ile kontrol edilir.
+
+            setTimeout(() => { isHandlingSignal = false; }, 400);
+        });
+
+        // EVRENSEL LİNK DEĞİŞİM SİNYALİ DİNLEME
+        connection.on("ReceiveVideoUrl", function (mediaData) {
+            isHandlingSignal = true;
+            const type = mediaData.type;
+            const payload = mediaData.payload;
+            activePlayerType = type;
+
+            const logs = document.getElementById("chatLogs");
+
+            // Tüm oynatıcıları gizleme hazırlığı
+            document.getElementById("ytPlayerContainer").classList.add("hidden-player");
+            document.getElementById("mp4Player").classList.add("hidden-player");
+            document.getElementById("webEmbedPlayer").classList.add("hidden-player");
+            mp4Player.pause();
+            if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+
+            if (type === "youtube") {
+                document.getElementById("ytPlayerContainer").classList.remove("hidden-player");
+                if (ytPlayer && ytPlayer.loadVideoById) ytPlayer.loadVideoById(payload);
+                logs.innerHTML += `<div class="log-line" style="color:var(--cyber-cyan)">[SYS] Akış: YouTube platformuna çevrildi.</div>`;
+            } else if (type === "mp4") {
+                document.getElementById("mp4Player").classList.remove("hidden-player");
+                mp4Player.src = payload;
+                mp4Player.load();
+                mp4Player.play().catch(e => console.log(e));
+                logs.innerHTML += `<div class="log-line" style="color:var(--cyber-cyan)">[SYS] Akış: Doğrudan .MP4 medya akışına çevrildi.</div>`;
+            } else if (type === "webEmbed") {
+                // SİBER MOD: Sayfayı direkt tünelin içine fırlatıyoruz!
+                document.getElementById("webEmbedPlayer").classList.remove("hidden-player");
+                webEmbedPlayer.src = payload;
+                logs.innerHTML += `<div class="log-line" style="color:var(--cyber-red)">[SYS] Akış: Film platformu ekranı enjekte edildi! Odadakilerle aynı anda filmi başlatın.</div>`;
+            }
+
+            logs.scrollTop = logs.scrollHeight;
+            setTimeout(() => { isHandlingSignal = false; }, 500);
+        });
+
+        // TETİKLEYİCİLER
+        function onYoutubeStateChange(event) {
+            if (isHandlingSignal || activePlayerType !== "youtube") return;
+            let state = event.data === YT.PlayerState.PLAYING ? "play" : (event.data === YT.PlayerState.PAUSED ? "pause" : "");
+            if (state !== "") connection.invoke("SendVideoAction", roomCode, state, ytPlayer.getCurrentTime()).catch(err => console.error(err));
+        }
+
+        mp4Player.addEventListener("play", function() {
+            if (!isHandlingSignal && activePlayerType === "mp4") connection.invoke("SendVideoAction", roomCode, "play", mp4Player.currentTime).catch(err => console.error(err));
+        });
+        mp4Player.addEventListener("pause", function() {
+            if (!isHandlingSignal && activePlayerType === "mp4") connection.invoke("SendVideoAction", roomCode, "pause", mp4Player.currentTime).catch(err => console.error(err));
+        });
+
+        // AKILLI SİBER LİNK YAKALAYICI
+        function getYouTubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        document.getElementById("btnLoadVideo").addEventListener("click", function() {
+            const urlInput = document.getElementById("txtVideoUrl").value.trim();
+            if (!urlInput) return;
+
+            let mediaData = { type: "", payload: "" };
+            const ytId = getYouTubeId(urlInput);
+
+            if (ytId) {
+                mediaData.type = "youtube";
+                mediaData.payload = ytId;
+            } else if (urlInput.toLowerCase().endsWith(".mp4") || urlInput.toLowerCase().endsWith(".webm") || urlInput.toLowerCase().endsWith(".m3u8")) {
+                mediaData.type = "mp4";
+                mediaData.payload = urlInput;
+            } else {
+                // BURASI SİHRİN GERÇEKLEŞTİĞİ YER: YouTube veya MP4 değilse, girilen linki direkt Web Sayfası olarak gömüyoruz şef!
+                mediaData.type = "webEmbed";
+                mediaData.payload = urlInput;
+            }
+
+            if (connection.state === signalR.HubConnectionState.Connected) {
+                connection.invoke("SendVideoUrl", roomCode, mediaData)
+                    .then(() => { document.getElementById("txtVideoUrl").value = ""; })
+                    .catch(err => console.error(err));
+            }
+        });
+
+        // CHAT MESAJ
+        function sendMyMessage() {
+            const input = document.getElementById("btnMsgInput");
+            const msg = input.value.trim();
+            if (msg) { connection.invoke("SendMessage", roomCode, currentUser, msg).catch(err => console.error(err)); input.value = ""; }
+        }
+        document.getElementById("btnSendMsg").addEventListener("click", sendMyMessage);
+        document.getElementById("btnMsgInput").addEventListener("keypress", function(e) { if(e.key === "Enter") sendMyMessage(); });
+
+        // ŞİFRE
+        const btnTogglePass = document.getElementById("btnTogglePass");
+        const lblRoomPassword = document.getElementById("lblRoomPassword");
+        const realPass = lblRoomPassword.getAttribute("data-real-pass");
+        btnTogglePass.addEventListener("click", function() {
+            if (lblRoomPassword.innerText === "••••") { lblRoomPassword.innerText = realPass; btnTogglePass.innerText = "[GİZLE]"; }
+            else { lblRoomPassword.innerText = "••••"; btnTogglePass.innerText = "[GÖSTER]"; }
+        });
+    </script>
+</body>
+</html>
