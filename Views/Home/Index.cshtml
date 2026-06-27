@@ -57,18 +57,21 @@
     z-index: 9999999 !important;
     opacity: 1 !important;
     transition: opacity 0.4s ease !important;
+    padding: 15px !important; /* Mobilde kenarlardan taşmasın diye */
 }
 
 .noxus-popup-card {
     background: #12121a !important;
     border: 1px solid #222235 !important;
     border-radius: 16px !important;
-    width: 90% !important;
+    width: 100% !important;
     max-width: 520px !important;
-    padding: 24px !important;
+    padding: 20px !important;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8) !important;
     color: #f1f5f9 !important;
     font-family: 'Rajdhani', sans-serif !important;
+    max-height: 90vh !important; /* Mobilde ekrandan taşarsa kaydırılabilsin */
+    overflow-y: auto !important;
 }
 
 .noxus-popup-badge {
@@ -84,7 +87,7 @@
 
 .noxus-popup-header h2 {
     margin: 12px 0 16px 0 !important;
-    font-size: 1.5rem !important;
+    font-size: 1.3rem !important;
     color: #fff !important;
     border-bottom: 1px solid #222235 !important;
     padding-bottom: 10px !important;
@@ -95,19 +98,19 @@
 .noxus-popup-body p {
     color: #64748b !important;
     line-height: 1.5 !important;
-    font-size: 1rem !important;
+    font-size: 0.95rem !important;
 }
 
 .noxus-popup-features {
     background: #0a0a0f !important;
     border-radius: 12px !important;
-    padding: 14px !important;
+    padding: 12px !important;
     margin: 16px 0 !important;
     border: 1px solid #222235 !important;
 }
 
 .noxus-feature-row {
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important;
     color: #64748b !important;
     margin-bottom: 12px !important;
     display: flex !important;
@@ -128,7 +131,7 @@
 }
 
 .noxus-popup-note {
-    font-size: 0.8rem !important;
+    font-size: 0.75rem !important;
     color: #64748b !important;
 }
 
@@ -208,7 +211,7 @@
             display: flex;
             flex-direction: column;
             background-image: radial-gradient(circle at 50% 50%, #141425 0%, #0a0a0f 100%);
-            padding: 20px;
+            padding: 15px;
         }
 
         .app-interface {
@@ -220,23 +223,27 @@
             margin: 0 auto;
         }
 
+        /* Üst Menü Mobilde Esnek Hale Getirildi */
         .main-header {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 40px;
+            padding: 15px 20px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             border-bottom: 3px solid var(--cyber-cyan);
             box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
-            margin-bottom: 50px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: 700;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #fff;
             text-shadow: 0 0 10px var(--cyber-cyan);
             text-decoration: none;
@@ -244,16 +251,24 @@
 
         .logo span {
             color: var(--cyber-cyan);
-            margin: 0 5px;
+            margin: 0 3px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .status-badge {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             letter-spacing: 1px;
-            padding: 5px 15px;
+            padding: 5px 10px;
             border: 1px solid var(--border-color);
             background: rgba(0,0,0,0.3);
+            white-space: nowrap;
         }
 
         .auth-link {
@@ -266,24 +281,47 @@
             text-shadow: 0 0 10px currentColor;
         }
 
+        /* Grid Sistemi Mobilde Tek Kolon, Masaüstünde Çift Kolon Yapıldı */
         .central-panel {
             flex: 1;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 25px;
             align-items: center;
-            padding: 0 20px;
+            padding: 0;
+        }
+
+        @media (min-width: 768px) {
+            .central-panel {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                padding: 0 20px;
+            }
+            .logo {
+                font-size: 2rem;
+            }
+            .main-header {
+                padding: 20px 40px;
+                margin-bottom: 50px;
+            }
         }
 
         .cyber-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            padding: 40px;
+            padding: 25px;
             position: relative;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             transition: all 0.4s ease;
+        }
+
+        @media (min-width: 768px) {
+            .cyber-card {
+                padding: 40px;
+                gap: 25px;
+            }
         }
 
         .cyber-card::before {
@@ -317,9 +355,15 @@
 
         .card-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             letter-spacing: 1px;
+        }
+
+        @media (min-width: 768px) {
+            .card-title {
+                font-size: 1.5rem;
+            }
         }
 
         .create-zone .card-title { color: var(--cyber-yellow); }
@@ -327,7 +371,7 @@
 
         .card-desc {
             color: var(--text-muted);
-            font-size: 1rem;
+            font-size: 0.95rem;
             line-height: 1.5;
         }
 
@@ -347,12 +391,20 @@
         .cyber-input {
             background: #06060a;
             border: 1px solid var(--border-color);
-            padding: 15px;
+            padding: 12px;
             color: #fff;
             font-family: monospace;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             letter-spacing: 2px;
             transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .cyber-input {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
         }
 
         .cyber-input:focus {
@@ -362,15 +414,23 @@
         }
 
         .cyber-btn {
-            padding: 18px;
+            padding: 15px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
             border: none;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .cyber-btn {
+                padding: 18px;
+                font-size: 1rem;
+            }
         }
 
         .cyber-btn.yellow {
@@ -400,13 +460,14 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            padding: 15px;
         }
 
         .modal-content {
             background: var(--bg-card);
             border: 2px solid var(--cyber-yellow);
             box-shadow: 0 0 30px rgba(255, 236, 0, 0.15);
-            padding: 35px;
+            padding: 25px;
             width: 100%;
             max-width: 450px;
             display: flex;
@@ -430,7 +491,7 @@
 <body>
 @if (TempData["Error"] != null)
 {
-    <div style="background: rgba(255, 0, 85, 0.2); border: 1px solid var(--cyber-red); color: #fff; padding: 15px; text-align: center; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 0, 85, 0.2); margin-bottom: 20px;">
+    <div style="background: rgba(255, 0, 85, 0.2); border: 1px solid var(--cyber-red); color: #fff; padding: 15px; text-align: center; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; box-shadow: 0 0 15px rgba(255, 0, 85, 0.2); margin-bottom: 20px; font-size: 0.9rem;">
         [SYS_ALERT] @TempData["Error"]
     </div>
 }
@@ -438,14 +499,14 @@
         <header class="main-header">
             <a href="/" class="logo">NOXUS<span>//</span>NET</a>
             
-            <div style="display: flex; align-items: center; gap: 15px;">
+            <div class="header-actions">
                 <div class="status-badge" style="border-color: var(--cyber-yellow);">
                     <a href="/Account/Login" class="auth-link login" style="color: var(--cyber-yellow);">// LOGIN</a>
                 </div>
                 <div class="status-badge" style="border-color: var(--cyber-cyan);">
                     <a href="/Account/Register" class="auth-link register" style="color: var(--cyber-cyan);">// REGISTER</a>
                 </div>
-                <div class="status-badge">SYS_STATUS: <span style="color: var(--cyber-cyan);">ONLINE</span></div>
+                <div class="status-badge">SYS: <span style="color: var(--cyber-cyan);">ONLINE</span></div>
             </div>
         </header>
 
