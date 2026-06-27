@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WhatchParty</title>
+    <title>@ViewData["Title"] - Syncarus</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WhatchParty</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Syncarus</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,194 +39,187 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2026 - WhatchParty - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2026 - Syncarus - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-<div id="ikarusWelcomeModal" class="ikarus-popup-overlay">
-    <div class="ikarus-popup-card">
-        <div class="ikarus-popup-header">
-            <span class="ikarus-popup-badge">🛰️ Canlı Yayın Laboratuvarı</span>
-            <h2>Proje Aydınlatma Metni</h2>
-        </div>
-        <div class="ikarus-popup-body">
-            <p>Bu platform, arkadaşlarınızla dünyanın neresinde olursanız olun <strong>tamamen eş zamanlı (senkronize)</strong> bir şekilde video izleyebilmeniz için kurgulanmış bağımsız bir backend geliştirme projesidir.</p>
-            
-            <div class="ikarus-popup-features">
-                <div class="ikarus-feature-row">
-                    <span class="ikarus-icon">⚡</span>
-                    <div>
-                        <strong>SignalR Senkronizasyonu:</strong> 
-                        Video oynatıldığında, durdurulduğunda veya süre değiştirildiğinde odadaki herkes milisaniyelik hızla aynı ana tanıklık eder.
-                    </div>
-                </div>
-                <div class="ikarus-feature-row">
-                    <span class="ikarus-icon">📱</span>
-                    <div>
-                        <strong>Cross-Platform Desteği:</strong> 
-                        Bilgisayar, tablet veya mobil cihaz fark etmeksizin tüm tarayıcılardan odalara kesintisiz katılabilirsiniz.
-                    </div>
-                </div>
-                <div class="ikarus-feature-row">
-                    <span class="ikarus-icon">🔒</span>
-                    <div>
-                        <strong>Güvenli Oturum Politikası:</strong> 
-                        Oturum ve çerez yapılandırması tamamen HTTPS protokolüyle şifrelenerek mobil cihazlar için tam uyumlu hale getirilmiştir.
-                    </div>
-                </div>
+
+    <div id="ikarusWelcomeModal" class="ikarus-popup-overlay">
+        <div class="ikarus-popup-card">
+            <div class="ikarus-popup-header">
+                <span class="ikarus-popup-badge">🛰️ Canlı Yayın Laboratuvarı</span>
+                <h2>Syncarus Aydınlatma Metni</h2>
             </div>
-            
-            <p class="ikarus-popup-note">
-                * Önemli Not: Ücretsiz bulut sunucuları kullanıldığı için odalardaki veriler sunucu uyku moduna geçtiğinde sıfırlanabilir, ancak anlık senkronizasyon kesintisiz akar!
-            </p>
-        </div>
-        <div class="ikarus-popup-footer">
-            <button id="ikarusCloseModalBtn" class="ikarus-popup-btn">Okudum, Başlayalım! 🚀</button>
+            <div class="ikarus-popup-body">
+                <p>Bu platform, arkadaşlarınızla dünyanın neresinde olursanız olun <strong>tamamen eş zamanlı (senkronize)</strong> bir şekilde video izleyebilmeniz için kurgulanmış bağımsız ve özgün bir backend projesidir.</p>
+                
+                <div class="ikarus-popup-features">
+                    <div class="ikarus-feature-row">
+                        <span class="ikarus-icon">⚡</span>
+                        <div>
+                            <strong>SignalR Senkronizasyonu:</strong> 
+                            Video oynatıldığında, durdurulduğunda veya süre değiştirildiğinde odadaki herkes milisaniyelik hızla aynı ana tanıklık eder.
+                        </div>
+                    </div>
+                    <div class="ikarus-feature-row">
+                        <span class="ikarus-icon">📱</span>
+                        <div>
+                            <strong>Cross-Platform Desteği:</strong> 
+                            Bilgisayar, tablet veya mobil cihaz fark etmeksizin tüm tarayıcılardan odalara kesintisiz katılabilirsiniz.
+                        </div>
+                    </div>
+                    <div class="ikarus-feature-row">
+                        <span class="ikarus-icon">🔒</span>
+                        <div>
+                            <strong>Güvenli Oturum Politikası:</strong> 
+                            Oturum ve çerez yapılandırması tamamen HTTPS protokolüyle şifrelenerek mobil cihazlar ve tabletler için tam uyumlu hale getirilmiştir.
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="ikarus-popup-note">
+                    * Önemli Not: Ücretsiz bulut sunucuları kullanıldığı için odalardaki veriler sunucu uyku moduna geçtiğinde sıfırlanabilir, ancak anlık senkronizasyon kesintisiz akar!
+                </p>
+            </div>
+            <div class="ikarus-popup-footer">
+                <button id="ikarusCloseModalBtn" class="ikarus-popup-btn">Okudum, Başlayalım! 🚀</button>
+            </div>
         </div>
     </div>
-</div>
 
-<style>
-/* Pop-up Arka Plan Karartma ve Buzlu Cam Efekti */
-.ikarus-popup-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 10, 12, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999999;
-    opacity: 1;
-    transition: opacity 0.4s ease;
-}
-
-/* Pop-up Kart Tasarımı */
-.ikarus-popup-card {
-    background: #16161a;
-    border: 1px solid #242629;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 520px;
-    padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-    color: #fffffe;
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
-.ikarus-popup-badge {
-    background: #7f5af0;
-    color: #fffffe;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: inline-block;
-    margin-bottom: 12px;
-}
-
-.ikarus-popup-header h2 {
-    margin: 0 0 16px 0;
-    font-size: 1.4rem;
-    color: #fffffe;
-    border-bottom: 1px solid #242629;
-    padding-bottom: 10px;
-}
-
-.ikarus-popup-body p {
-    color: #94a1b2;
-    line-height: 1.5;
-    font-size: 0.9rem;
-    margin-bottom: 16px;
-}
-
-/* Özellik Listesi */
-.ikarus-popup-features {
-    background: #010101;
-    border-radius: 12px;
-    padding: 14px;
-    margin-bottom: 16px;
-    border: 1px solid #242629;
-}
-
-.ikarus-feature-row {
-    font-size: 0.85rem;
-    color: #94a1b2;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: flex-start;
-}
-
-.ikarus-feature-row:last-child {
-    margin-bottom: 0;
-}
-
-.ikarus-icon {
-    margin-right: 12px;
-    font-size: 1.1rem;
-}
-
-.ikarus-feature-row strong {
-    color: #7f5af0;
-    display: inline-block;
-}
-
-.ikarus-popup-note {
-    font-size: 0.75rem !important;
-    color: #72757e !important;
-    margin: 0;
-}
-
-/* Buton Tasarımı */
-.ikarus-popup-btn {
-    background: #2cb67d;
-    color: #fffffe;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    width: 100%;
-    cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
-}
-
-.ikarus-popup-btn:hover {
-    background: #249968;
-}
-
-.ikarus-popup-btn:active {
-    transform: scale(0.98);
-}
-</style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    var modal = document.getElementById("ikarusWelcomeModal");
-    var btn = document.getElementById("ikarusCloseModalBtn");
-
-    // Tarayıcı hafıza kontrolü: Kullanıcı daha önce onayladıysa pop-up'ı gösterme
-    if (localStorage.getItem("ikarus_popup_seen") === "true") {
-        modal.style.display = "none";
+    <style>
+    .ikarus-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 12, 0.8);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        display: flex; /* Varsayılan olarak flex gösteriyoruz */
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        opacity: 1;
+        transition: opacity 0.4s ease;
     }
 
-    // Kapatma mekanizması
-    btn.addEventListener("click", function () {
-        modal.style.opacity = "0";
-        setTimeout(function () {
-            modal.style.display = "none";
-            // Hafızaya kaydet
-            localStorage.setItem("ikarus_popup_seen", "true");
-        }, 400);
+    .ikarus-popup-card {
+        background: #16161a;
+        border: 1px solid #242629;
+        border-radius: 16px;
+        width: 90%;
+        max-width: 520px;
+        padding: 24px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        color: #fffffe;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .ikarus-popup-badge {
+        background: #7f5af0;
+        color: #fffffe;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 12px;
+    }
+
+    .ikarus-popup-header h2 {
+        margin: 0 0 16px 0;
+        font-size: 1.4rem;
+        color: #fffffe;
+        border-bottom: 1px solid #242629;
+        padding-bottom: 10px;
+    }
+
+    .ikarus-popup-body p {
+        color: #94a1b2;
+        line-height: 1.5;
+        font-size: 0.9rem;
+        margin-bottom: 16px;
+    }
+
+    .ikarus-popup-features {
+        background: #010101;
+        border-radius: 12px;
+        padding: 14px;
+        margin-bottom: 16px;
+        border: 1px solid #242629;
+    }
+
+    .ikarus-feature-row {
+        font-size: 0.85rem;
+        color: #94a1b2;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .ikarus-feature-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .ikarus-icon {
+        margin-right: 12px;
+        font-size: 1.1rem;
+    }
+
+    .ikarus-feature-row strong {
+        color: #7f5af0;
+        display: inline-block;
+    }
+
+    .ikarus-popup-note {
+        font-size: 0.75rem !important;
+        color: #72757e !important;
+        margin: 0;
+    }
+
+    .ikarus-popup-btn {
+        background: #2cb67d;
+        color: #fffffe;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .ikarus-popup-btn:hover {
+        background: #249968;
+    }
+
+    .ikarus-popup-btn:active {
+        transform: scale(0.98);
+    }
+    </style>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var modal = document.getElementById("ikarusWelcomeModal");
+        var btn = document.getElementById("ikarusCloseModalBtn");
+
+        // Hafıza kontrolü tamamen kaldırıldı: popup her girişte doğrudan tetiklenecek!
+        modal.style.display = "flex";
+
+        // Kapatma mekanizması
+        btn.addEventListener("click", function () {
+            modal.style.opacity = "0";
+            setTimeout(function () {
+                modal.style.display = "none";
+            }, 400);
+        });
     });
-});
-</script>
+    </script>
 </body>
 </html>
