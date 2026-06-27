@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IKARUS // UNIVERSAL MULTI-TUNNEL</title>
+    <title>NOXUSNET // UNIVERSAL MULTI-TUNNEL</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
@@ -87,7 +87,6 @@
         .stream-zone { padding: 20px; display: flex; flex-direction: column; background: #08080f; }
         .video-wrapper { flex: 1; background: #000; border: 1px solid var(--border-color); position: relative; }
 
-        /* Sürücüler Üst Üste Biniyor, Akıllı JS Sadece İsteneni Gösterecek */
         #ytPlayerContainer, #mp4Player, #webEmbedPlayer {
             width: 100%; height: 100%; position: absolute; top: 0; left: 0; border: none; object-fit: contain;
         }
@@ -107,13 +106,165 @@
         .comms-input:focus { outline: none; border-color: var(--cyber-cyan); }
         .comms-btn { background: var(--cyber-cyan); color: #000; border: none; padding: 0 20px; font-family: 'Orbitron', sans-serif; font-weight: 700; cursor: pointer; transition: all 0.3s; }
         .comms-btn:hover { background: #fff; box-shadow: 0 0 10px var(--cyber-cyan); }
+
+        /* CRITICAL MOBİL PROTOKOL POP-UP STİLLERİ */
+        .noxus-room-overlay {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            background: rgba(4, 4, 6, 0.98) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            z-index: 99999999 !important;
+            opacity: 1 !important;
+            transition: opacity 0.4s ease !important;
+            padding: 15px !important;
+        }
+
+        .noxus-room-card {
+            background: #0d0d13 !important;
+            border: 2px solid #ffec00 !important;
+            border-radius: 20px !important;
+            width: 100% !important;
+            max-width: 600px !important;
+            padding: 30px !important;
+            box-shadow: 0 0 40px rgba(255, 236, 0, 0.2) !important;
+            color: #f1f5f9 !important;
+        }
+
+        .noxus-alert-badge {
+            background: #ff0055 !important;
+            color: #fff !important;
+            padding: 6px 14px !important;
+            border-radius: 4px !important;
+            font-size: 0.9rem !important;
+            font-weight: 700 !important;
+            display: inline-block !important;
+            font-family: 'Orbitron', sans-serif !important;
+            letter-spacing: 1px !important;
+        }
+
+        .noxus-room-header h2 {
+            margin: 15px 0 !important;
+            font-size: 1.8rem !important;
+            color: #fff !important;
+            font-family: 'Orbitron', sans-serif !important;
+            letter-spacing: 2px !important;
+        }
+
+        .noxus-instruction-box {
+            background: #14141f !important;
+            border-radius: 12px !important;
+            padding: 20px !important;
+            margin-bottom: 20px !important;
+            display: flex !important;
+            align-items: flex-start !important;
+            gap: 15px !important;
+        }
+
+        .yellow-border { border: 1px solid #ffec00 !important; }
+        .red-border { border: 2px solid #ff0055 !important; }
+        .box-icon { font-size: 2rem !important; }
+
+        @@keyframes rotatePhone {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(90deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .rotate-icon {
+            display: inline-block !important;
+            animation: rotatePhone 2.5s infinite ease-in-out !important;
+        }
+
+        .giant-text {
+            font-family: 'Orbitron', sans-serif !important;
+            font-size: 1.5rem !important;
+            font-weight: 700 !important;
+            letter-spacing: 1px !important;
+            margin-bottom: 8px !important;
+            color: #ffec00 !important;
+        }
+
+        .red-text { color: #ff0055 !important; }
+        .force-bold { font-weight: 700 !important; color: #fff !important; }
+
+        .noxus-room-body p {
+            color: #94a1b2 !important;
+            line-height: 1.5 !important;
+            font-size: 1rem !important;
+        }
+
+        .noxus-confirm-btn {
+            background: #00f0ff !important;
+            color: #000 !important;
+            border: none !important;
+            padding: 16px 24px !important;
+            border-radius: 8px !important;
+            font-size: 1.2rem !important;
+            font-weight: 700 !important;
+            width: 100% !important;
+            cursor: pointer !important;
+            font-family: 'Orbitron', sans-serif !important;
+            letter-spacing: 1px !important;
+            transition: all 0.3s ease !important;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3) !important;
+        }
+
+        .noxus-confirm-btn:hover {
+            background: #fff !important;
+            box-shadow: 0 0 25px #00f0ff !important;
+        }
+
+        @@keyframes pulseAlert {
+            0% { box-shadow: 0 0 10px rgba(255, 0, 85, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(255, 0, 85, 0.6); }
+            100% { box-shadow: 0 0 10px rgba(255, 0, 85, 0.2); }
+        }
+        .pulse-animation {
+            animation: pulseAlert 2s infinite ease-in-out !important;
+        }
     </style>
 </head>
 <body>
 
+    <div id="noxusRoomInitModal" class="noxus-room-overlay">
+        <div class="noxus-room-card">
+            <div class="noxus-room-header">
+                <span class="noxus-alert-badge">⚠️ KRİTİK SİBER PROTOKOL</span>
+                <h2>TÜNEL BAŞARIYLA AÇILDI!</h2>
+            </div>
+            <div class="noxus-room-body">
+                
+                <div class="noxus-instruction-box yellow-border">
+                    <span class="box-icon">🔗</span>
+                    <div>
+                        <h3 class="giant-text">VİDEO LİNKİ YAPIŞTIRIN!</h3>
+                        <p>Odanın üst panelindeki enjekte alanına izlemek istediğiniz <strong>YouTube, MP4 veya harici film sitesi linkini</strong> yapıştırıp 'LOAD' butonuna basmanız gerekmektedir. Link yüklenmeden senkronizasyon tüneli aktifleşmez!</p>
+                    </div>
+                </div>
+
+                <div class="noxus-instruction-box red-border pulse-animation">
+                    <span class="box-icon rotate-icon">📱🔄</span>
+                    <div>
+                        <h3 class="giant-text red-text">TELEFONU YATAY TUTUN!</h3>
+                        <p class="force-bold">Videonun kusursuz ölçeklenmesi ve arayüz elementlerinin tam oturması için MOBİL CİHAZINIZI MUTLAKA YATAY (LANDSCAPE) KONUMA GETİRİN!</p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="noxus-room-footer">
+                <button id="noxusConfirmRoomBtn" class="noxus-confirm-btn">ANLAŞILDI, TÜNELİ BAŞLAT! 🛰️</button>
+            </div>
+        </div>
+    </div>
     <header class="tunnel-header">
         <div class="room-meta-zone">
-            <div class="room-title">// UNIVERSAL TUNNEL: @ViewBag.RoomName</div>
+            <div class="room-title">// NOXUSNET TUNNEL: @ViewBag.RoomName</div>
             <div class="room-info">ID: <span id="roomCodeSpan">@ViewBag.RoomCode</span></div>
         </div>
 
@@ -144,7 +295,7 @@
         </main>
 
         <aside class="comms-panel">
-            <div class="panel-header">// TUNNEL_UNIVERSAL_LOG</div>
+            <div class="panel-header">// NOXUSNET_TUNNEL_LOG</div>
             <div class="chat-logs" id="chatLogs">
                 <div class="log-line"><span class="log-time">[SYS]</span> <span style="color: var(--cyber-cyan);">Evrensel akış algılayıcı devrede.</span></div>
             </div>
@@ -192,7 +343,6 @@
             logs.scrollTop = logs.scrollHeight;
         });
 
-        // HİBRİT ANLIK OYNAT/DURDUR SİNYALİ DİNLEME
         connection.on("ReceiveVideoAction", function (action, time) {
             if (isHandlingSignal) return;
             isHandlingSignal = true;
@@ -206,12 +356,10 @@
                 if (action === "play") mp4Player.play().catch(e => console.log(e));
                 else if (action === "pause") mp4Player.pause();
             }
-            // Not: webEmbed (iframe) dış sitelerin kendi koruması nedeniyle kodla durdurulup başlatılamaz şef, el ile kontrol edilir.
 
             setTimeout(() => { isHandlingSignal = false; }, 400);
         });
 
-        // EVRENSEL LİNK DEĞİŞİM SİNYALİ DİNLEME
         connection.on("ReceiveVideoUrl", function (mediaData) {
             isHandlingSignal = true;
             const type = mediaData.type;
@@ -220,7 +368,6 @@
 
             const logs = document.getElementById("chatLogs");
 
-            // Tüm oynatıcıları gizleme hazırlığı
             document.getElementById("ytPlayerContainer").classList.add("hidden-player");
             document.getElementById("mp4Player").classList.add("hidden-player");
             document.getElementById("webEmbedPlayer").classList.add("hidden-player");
@@ -238,7 +385,6 @@
                 mp4Player.play().catch(e => console.log(e));
                 logs.innerHTML += `<div class="log-line" style="color:var(--cyber-cyan)">[SYS] Akış: Doğrudan .MP4 medya akışına çevrildi.</div>`;
             } else if (type === "webEmbed") {
-                // SİBER MOD: Sayfayı direkt tünelin içine fırlatıyoruz!
                 document.getElementById("webEmbedPlayer").classList.remove("hidden-player");
                 webEmbedPlayer.src = payload;
                 logs.innerHTML += `<div class="log-line" style="color:var(--cyber-red)">[SYS] Akış: Film platformu ekranı enjekte edildi! Odadakilerle aynı anda filmi başlatın.</div>`;
@@ -248,7 +394,6 @@
             setTimeout(() => { isHandlingSignal = false; }, 500);
         });
 
-        // TETİKLEYİCİLER
         function onYoutubeStateChange(event) {
             if (isHandlingSignal || activePlayerType !== "youtube") return;
             let state = event.data === YT.PlayerState.PLAYING ? "play" : (event.data === YT.PlayerState.PAUSED ? "pause" : "");
@@ -262,7 +407,6 @@
             if (!isHandlingSignal && activePlayerType === "mp4") connection.invoke("SendVideoAction", roomCode, "pause", mp4Player.currentTime).catch(err => console.error(err));
         });
 
-        // AKILLI SİBER LİNK YAKALAYICI
         function getYouTubeId(url) {
             const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
             const match = url.match(regExp);
@@ -283,7 +427,6 @@
                 mediaData.type = "mp4";
                 mediaData.payload = urlInput;
             } else {
-                // BURASI SİHRİN GERÇEKLEŞTİĞİ YER: YouTube veya MP4 değilse, girilen linki direkt Web Sayfası olarak gömüyoruz şef!
                 mediaData.type = "webEmbed";
                 mediaData.payload = urlInput;
             }
@@ -295,7 +438,6 @@
             }
         });
 
-        // CHAT MESAJ
         function sendMyMessage() {
             const input = document.getElementById("btnMsgInput");
             const msg = input.value.trim();
@@ -304,7 +446,6 @@
         document.getElementById("btnSendMsg").addEventListener("click", sendMyMessage);
         document.getElementById("btnMsgInput").addEventListener("keypress", function(e) { if(e.key === "Enter") sendMyMessage(); });
 
-        // ŞİFRE
         const btnTogglePass = document.getElementById("btnTogglePass");
         const lblRoomPassword = document.getElementById("lblRoomPassword");
         const realPass = lblRoomPassword.getAttribute("data-real-pass");
@@ -312,6 +453,25 @@
             if (lblRoomPassword.innerText === "••••") { lblRoomPassword.innerText = realPass; btnTogglePass.innerText = "[GİZLE]"; }
             else { lblRoomPassword.innerText = "••••"; btnTogglePass.innerText = "[GÖSTER]"; }
         });
+
+        // POP-UP MUTLAK KAPATMA SCRIPT PROTOKOLÜ
+        (function() {
+            function initRoomModal() {
+                var modal = document.getElementById("noxusRoomInitModal");
+                var btn = document.getElementById("noxusConfirmRoomBtn");
+                if(modal && btn) {
+                    modal.style.setProperty('display', 'flex', 'important');
+                    btn.onclick = function() {
+                        modal.style.setProperty('opacity', '0', 'important');
+                        setTimeout(function() {
+                            modal.style.setProperty('display', 'none', 'important');
+                        }, 400);
+                    };
+                }
+            }
+            window.addEventListener('DOMContentLoaded', initRoomModal);
+            window.addEventListener('load', initRoomModal);
+        })();
     </script>
 </body>
 </html>
